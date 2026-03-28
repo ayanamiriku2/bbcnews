@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: bbcnews-mirror
+    runtime: node
+    plan: starter
+    buildCommand: npm ci --only=production
+    startCommand: node src/server.js
+    healthCheckPath: /healthz
+    envVars:
+      - key: MIRROR_HOST
+        sync: false
+      - key: MIRROR_PROTOCOL
+        value: https
+      - key: NODE_ENV
+        value: production
